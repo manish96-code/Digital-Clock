@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: sans-serif;
+      height: 100vh;
+      width: 100%;
+      background-color: darkred;
+      color: white;
+    }
+    .clock {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    #time {
+      color: white;
+      font-size: 240px;
+      font-weight: bolder;
+    }
+    #date {
+      font-size: 100px;
+    }
+  </style>
+
+  <body>
+    <div class="clock">
+      <h1 id="time"></h1>
+      <h5 id="date"></h5>
+    </div>
+
+    <script>
+      let time = document.getElementById("time");
+      let dateData = document.getElementById("date");
+
+      function runclock() {
+        let date = new Date();
+
+        // let hour = (date.getHours() >=12) ? date.getHours()-12 : date.getHours();
+        // hour = (hour < 10) ? `0${hour}` : hour;
+
+        let hour = date.getHours();
+        let ampm = hour >= 12 ? "PM" : "AM";
+        hour = hour % 12;
+        hour = hour === 0 ? 12 : hour; // handle midnight/noon
+        hour = hour < 10 ? `0${hour}` : hour;
+
+        let min = date.getMinutes();
+        min = min < 10 ? `0${min}` : min;
+
+        let sec = date.getSeconds();
+        sec = sec < 10 ? `0${sec}` : sec;
+
+        // let ampm = (hour >= 12) ? "PM" : "AM";
+
+        let timeStr = `${hour}:${min}:${sec} ${ampm}`;
+        let dateStr = `${date.getDate()}-${
+          date.getMonth() + 1
+        }-${date.getFullYear()}`;
+
+        time.innerHTML = timeStr;
+        dateData.innerHTML = dateStr;
+      }
+      setInterval(runclock, 1000);
+    </script>
+  </body>
+</html>
