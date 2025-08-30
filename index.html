@@ -47,14 +47,11 @@
 
       function runclock() {
         let date = new Date();
-
-        // let hour = (date.getHours() >=12) ? date.getHours()-12 : date.getHours();
-        // hour = (hour < 10) ? `0${hour}` : hour;
-
+        
         let hour = date.getHours();
         let ampm = hour >= 12 ? "PM" : "AM";
         hour = hour % 12;
-        hour = hour === 0 ? 12 : hour; // handle midnight/noon
+        hour = hour === 0 ? 12 : hour;
         hour = hour < 10 ? `0${hour}` : hour;
 
         let min = date.getMinutes();
@@ -63,7 +60,6 @@
         let sec = date.getSeconds();
         sec = sec < 10 ? `0${sec}` : sec;
 
-        // let ampm = (hour >= 12) ? "PM" : "AM";
 
         let timeStr = `${hour}:${min}:${sec} ${ampm}`;
         let dateStr = `${date.getDate()}-${
